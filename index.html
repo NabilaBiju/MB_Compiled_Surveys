@@ -1,0 +1,182 @@
+<script>
+  const startTime = new Date();
+  document.getElementById("start_time").value = startTime.toISOString();
+
+  function getRadioValue(name) {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    if (!checked) return null;
+    const firstNumber = parseInt(checked.value);
+    return isNaN(firstNumber) ? checked.value : firstNumber;
+  }
+
+  function getTextValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value : "";
+  }
+
+  function sum(values) {
+    return values.reduce((a, b) => a + b, 0);
+  }
+
+  function pssScore() {
+    const raw = [
+      getRadioValue("PSS_Q1_Unexpected"),
+      getRadioValue("PSS_Q2_Control"),
+      getRadioValue("PSS_Q3_Nervous"),
+      getRadioValue("PSS_Q4_Confident"),
+      getRadioValue("PSS_Q5_Going_Your_Way"),
+      getRadioValue("PSS_Q6_Cope"),
+      getRadioValue("PSS_Q7_Control_Irritations"),
+      getRadioValue("PSS_Q8_On_Top"),
+      getRadioValue("PSS_Q9_Angered"),
+      getRadioValue("PSS_Q10_Difficulties")
+    ];
+
+    const scored = raw.map((v, i) => {
+      if ([3, 4, 6, 7].includes(i)) return 4 - v;
+      return v;
+    });
+
+    return sum(scored);
+  }
+
+  function pssCategory(score) {
+    if (score <= 13) return "Low perceived stress";
+    if (score <= 26) return "Moderate perceived stress";
+    return "High perceived stress";
+  }
+
+  function brsScore() {
+    const q1 = getRadioValue("BRS_Q1_Bounce_Back") + 1;
+    const q2 = 6 - (getRadioValue("BRS_Q2_Hard_Time") + 1);
+    const q3 = getRadioValue("BRS_Q3_Recover") + 1;
+    const q4 = 6 - (getRadioValue("BRS_Q4_Snap_Back") + 1);
+    const q5 = getRadioValue("BRS_Q5_Come_Through") + 1;
+    const q6 = 6 - (getRadioValue("BRS_Q6_Setbacks") + 1);
+
+    return ((q1 + q2 + q3 + q4 + q5 + q6) / 6).toFixed(2);
+  }
+
+  function brsCategory(avg) {
+    const n = parseFloat(avg);
+    if (n < 3.0) return "Lower resilience range";
+    if (n <= 4.3) return "Normal resilience range";
+    return "Higher resilience range";
+  }
+
+  function usdaAffirmativeScore() {
+    let score = 0;
+
+    const hh3 = document.querySelector('input[name="USDA_HH3_Food_Didnt_Last"]:checked')?.value;
+    const hh4 = document.querySelector('input[name="USDA_HH4_Balanced_Meals"]:checked')?.value;
+    const ad1 = document.querySelector('input[name="USDA_AD1_Cut_Skip_Meals"]:checked')?.value;
+    const ad1a = document.querySelector('input[name="USDA_AD1a_How_Often"]:checked')?.value;
+    const ad2 = document.querySelector('input[name="USDA_AD2_Ate_Less"]:checked')?.value;
+    const ad3 = document.querySelector('input[name="USDA_AD3_Hungry_Didnt_Eat"]:checked')?.value;
+
+    if (hh3 === "Often true" || hh3 === "Sometimes true") score++;
+    if (hh4 === "Often true" || hh4 === "Sometimes true") score++;
+    if (ad1 === "Yes") score++;
+    if (ad1a === "Almost every month" || ad1a === "Some months but not every month") score++;
+    if (ad2 === "Yes") score++;
+    if (ad3 === "Yes") score++;
+
+    return score;
+  }
+
+  function usdaCategory(score) {
+    if (score <= 1) return "High or marginal food security";
+    if (score <= 4) return "Low food security";
+    return "Very low food security";
+  }
+
+  function sf12Summary() {
+    const health = document.querySelector('input[name="SF12_Q1_General_Health"]:checked')?.value || "";
+    return health.replace(/^\d+\s*/, "");
+  }
+
+  async function submitToFormspree(formData) {
+    const response = await fetch("https://formspree.io/f/maqvwbql", {
+      method: "POST",
+      body: formData,
+      headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) {
+      throw new Error("Formspree submission failed");
+    }
+  }
+
+  document.getElementById("studyForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const submitTime = new Date();
+    const durationSeconds = Math.round((submitTime - startTime) / 1000);
+
+    document.getElementById("submit_time").value = submitTime.toISOString();
+    document.getElementById("duration_seconds").value = durationSeconds;
+    document.getElementById("duration_minutes").value = (durationSeconds / 60).toFixed(2);
+
+    const pss = pssScore();
+    const brs = brsScore();
+    const usda = usdaAffirmativeScore();
+
+    const formData = new FormData(this);
+    formData.append("PSS_Total_Score", pss);
+    formData.append("PSS_Category", pssCategory(pss));
+    formData.append("BRS_Average_Score", brs);
+    formData.append("BRS_Category", brsCategory(brs));
+    formData.append("USDA_Six_Item_Raw_Score", usda);
+    formData.append("USDA_Category", usdaCategory(usda));
+    formData.append("SF12_Self_Rated_Health", sf12Summary());
+
+    try {
+      await submitToFormspree(formData);
+
+      document.querySelector(".content").innerHTML = `
+        <div class="intro">
+          <h2>Thank you for completing the pilot survey!</h2>
+          <p>Your responses were submitted successfully.</p>
+          <p><strong>Completion time:</strong> ${(durationSeconds / 60).toFixed(2)} minutes</p>
+        </div>
+
+        <div class="section">
+          <h2>Your Self-Reflection Results</h2>
+          <p class="note">
+            These results are for personal reflection only. They are not a diagnosis, treatment recommendation, or academic evaluation.
+          </p>
+
+          <div class="question">
+            <p><strong>Perceived Stress Scale (PSS-10):</strong></p>
+            <p>Score: ${pss} / 40</p>
+            <p>Category: ${pssCategory(pss)}</p>
+          </div>
+
+          <div class="question">
+            <p><strong>Brief Resilience Scale (BRS):</strong></p>
+            <p>Average score: ${brs}</p>
+            <p>Category: ${brsCategory(brs)}</p>
+          </div>
+
+          <div class="question">
+            <p><strong>USDA Six-Item Food Security Module:</strong></p>
+            <p>Raw score: ${usda} / 6</p>
+            <p>Category: ${usdaCategory(usda)}</p>
+          </div>
+
+          <div class="question">
+            <p><strong>SF-12 Self-Rated Health:</strong></p>
+            <p>Your selected general health rating: ${sf12Summary()}</p>
+            <p class="note">Full SF-12 physical and mental component scoring requires standardized scoring procedures and is not shown here.</p>
+          </div>
+
+          <div class="privacy">
+            <strong>Reminder:</strong> These results are only a brief summary based on your survey responses.
+          </div>
+        </div>
+      `;
+    } catch (error) {
+      alert("There was a problem submitting the survey. Please try again or contact Dr. Biju.");
+    }
+  });
+</script>
