@@ -215,6 +215,14 @@
             <h2>Participant Information</h2>
             <label for="name">Full Name *</label>
             <input type="text" id="name" name="Full Name" required />
+            <label for="bnumber">B# *</label>
+<input
+  type="text"
+  id="bnumber"
+  name="B_Number"
+  placeholder="Example: B01234567"
+  required
+>
 
                       </div>
 
@@ -462,112 +470,229 @@
             </div>
           </div>
 
-          <div class="section">
-            <h2>A5. Custom Questionnaire</h2>
+    <div class="section">
+  <h2>A5. Custom Questionnaire</h2>
 
-            <label>What is your current class year?</label>
-            <select name="Custom_Class_Year" required>
-              <option value="">Select</option>
-              <option>First-year</option>
-              <option>Sophomore</option>
-              <option>Junior</option>
-              <option>Senior</option>
-            </select>
+  <label>Are you enrolled in May 2026 term courses?</label>
+  <select name="Custom_May_Term_Enrollment" required>
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
 
-            <label>Are you enrolled in May 2026 term courses?</label>
-            <select name="Custom_May_Term_Enrollment" required>
-              <option value="">Select</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
+  <label>If yes, how many courses are you taking during May term?</label>
+  <select name="Custom_May_Term_Courses">
+    <option value="">Select if applicable</option>
+    <option>1</option>
+    <option>2</option>
+    <option>3 or more</option>
+  </select>
 
-            <label>If yes, how many courses are you taking during May term?</label>
-            <select name="Custom_May_Term_Courses">
-              <option value="">Select if applicable</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3 or more</option>
-            </select>
+  <label>How would you describe the overall intensity of your current/ most recent semester load?</label>
+  <select name="Custom_Course_Load_Intensity" required>
+    <option value="">Select</option>
+    <option>Very light</option>
+    <option>Light</option>
+    <option>Moderate</option>
+    <option>Heavy</option>
+    <option>Very heavy</option>
+  </select>
 
-            <label>How would you describe the overall intensity of your current/ most recent semester load?</label>
-            <select name="Custom_Course_Load_Intensity" required>
-              <option value="">Select</option>
-              <option>Very light</option>
-              <option>Light</option>
-              <option>Moderate</option>
-              <option>Heavy</option>
-              <option>Very heavy</option>
-            </select>
+  <label>On average, how many hours per day do you spend studying outside of class during semester?</label>
+  <select name="Custom_Study_Hours" required>
+    <option value="">Select</option>
+    <option>Less than 1 hour</option>
+    <option>1–2 hours</option>
+    <option>3–4 hours</option>
+    <option>5–6 hours</option>
+    <option>More than 6 hours</option>
+  </select>
 
-            <label>On average, how many hours per day do you spend studying outside of class during semester?</label>
-            <select name="Custom_Study_Hours" required>
-              <option value="">Select</option>
-              <option>Less than 1 hour</option>
-              <option>1–2 hours</option>
-              <option>3–4 hours</option>
-              <option>5–6 hours</option>
-              <option>More than 6 hours</option>
-            </select>
+  <h3>Labor Program / Work Context</h3>
 
-            <label>On average, how many hours of sleep do you get per night during semester?</label>
-            <select name="Custom_Sleep_Hours" required>
-              <option value="">Select</option>
-              <option>Less than 5 hours</option>
-              <option>5–6 hours</option>
-              <option>6–7 hours</option>
-              <option>7–8 hours</option>
-              <option>More than 8 hours</option>
-            </select>
+  <label>How physically demanding is your primary labor position?</label>
+  <select name="Labor_Physical_Demand">
+    <option value="">Select</option>
+    <option>Sedentary</option>
+    <option>Light</option>
+    <option>Moderate</option>
+    <option>Heavy</option>
+    <option>Very heavy</option>
+  </select>
 
-            <label>Do you participate in organized athletics or regular training during semester?</label>
-            <select name="Custom_Physical_Activity" required>
-              <option value="">Select</option>
-              <option>Yes (varsity athlete)</option>
-              <option>Yes (club or recreational sport)</option>
-              <option>Yes (independent training/exercise)</option>
-              <option>No</option>
-            </select>
+  <label>How mentally or emotionally demanding is your primary labor position?</label>
+  <select name="Labor_Mental_Demand">
+    <option value="">Select</option>
+    <option>Very low</option>
+    <option>Low</option>
+    <option>Moderate</option>
+    <option>High</option>
+    <option>Very high</option>
+  </select>
 
-            <label>If yes, approximately how many hours per week do you train or practice during semester?</label>
-            <select name="Custom_Training_Hours">
-              <option value="">Select if applicable</option>
-              <option>1–3 hours</option>
-              <option>4–6 hours</option>
-              <option>7–10 hours</option>
-              <option>More than 10 hours</option>
-            </select>
 
-            <label>Have you experienced any injury, pain, or physical limitation in the past 3 months that affects your movement?</label>
-            <select name="Custom_Injury_Pain" required>
-              <option value="">Select</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
+        <label>How physically demanding is your secondary labor position?</label>
+  <select name="Labor_Physical_Demand">
+    <option value="">Select</option>
+    <option>Sedentary</option>
+    <option>Light</option>
+    <option>Moderate</option>
+    <option>Heavy</option>
+    <option>Very heavy</option>
+    <option>I don't have a secondary</option>
+  </select>
 
-            <label>If yes, does this condition currently affect your ability to perform daily activities or exercise?</label>
-            <select name="Custom_Injury_Impact">
-              <option value="">Select if applicable</option>
-              <option>Not at all</option>
-              <option>Slightly</option>
-              <option>Moderately</option>
-              <option>Significantly</option>
-            </select>
+  <label>How mentally or emotionally demanding is your secondary labor position?</label>
+  <select name="Labor_Mental_Demand">
+    <option value="">Select</option>
+    <option>Very low</option>
+    <option>Low</option>
+    <option>Moderate</option>
+    <option>High</option>
+    <option>Very high</option>
+    <option>I don't have a secondary</option>
+  </select>
 
-            <label>During the most recent term, approximately how many credits did you attempt?</label>
-            <input type="number" name="Custom_Credits_Attempted" min="0" step="1" />
+  <label>What time of day do you usually work in your labor position?</label>
+  <select name="Labor_Time_Of_Day">
+    <option value="">Select</option>
+    <option>Morning</option>
+    <option>Afternoon</option>
+    <option>Evening</option>
+    <option>Varies significantly</option>
+  </select>
 
-            <label>Approximately how many credits did you successfully complete?</label>
-            <input type="number" name="Custom_Credits_Completed" min="0" step="1" />
+  <label>Do you currently have an off-campus job?</label>
+  <select name="Secondary_Job">
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
 
-            <label>Have you had any of the following during the current or most recent term? Select all that apply.</label>
-            <div class="options">
-              <label><input type="checkbox" name="Custom_Academic_Issues" value="Withdrew from a course" /> Withdrew from a course</label>
-              <label><input type="checkbox" name="Custom_Academic_Issues" value="Received an incomplete" /> Received an incomplete</label>
-              <label><input type="checkbox" name="Custom_Academic_Issues" value="Reduced course load during the term" /> Reduced course load during the term</label>
-              <label><input type="checkbox" name="Custom_Academic_Issues" value="None of the above" /> None of the above</label>
-            </div>
-          </div>
+  <label>On average, how many hours of sleep do you get per night during semester?</label>
+  <select name="Custom_Sleep_Hours" required>
+    <option value="">Select</option>
+    <option>Less than 5 hours</option>
+    <option>5–6 hours</option>
+    <option>6–7 hours</option>
+    <option>7–8 hours</option>
+    <option>More than 8 hours</option>
+  </select>
 
+  <h3>Sleep Quality</h3>
+
+  <label>Over the past month, how would you rate your sleep quality?</label>
+  <select name="Sleep_Quality">
+    <option value="">Select</option>
+    <option>Very poor</option>
+    <option>Poor</option>
+    <option>Fair</option>
+    <option>Good</option>
+    <option>Very good</option>
+  </select>
+
+  <label>During semester, how often do you wake up feeling rested?</label>
+  <select name="Wake_Rested">
+    <option value="">Select</option>
+    <option>Never</option>
+    <option>Rarely</option>
+    <option>Sometimes</option>
+    <option>Often</option>
+    <option>Always</option>
+  </select>
+
+  <label>During semester, how often do you feel tired during class or while studying?</label>
+  <select name="Tired_In_Class">
+    <option value="">Select</option>
+    <option>Never</option>
+    <option>Rarely</option>
+    <option>Sometimes</option>
+    <option>Often</option>
+    <option>Very often</option>
+  </select>
+
+  <label>Do you participate in organized athletics or regular training during semester?</label>
+  <select name="Custom_Physical_Activity" required>
+    <option value="">Select</option>
+    <option>Yes (varsity athlete)</option>
+    <option>Yes (club or recreational sport)</option>
+    <option>Yes (independent training/exercise)</option>
+    <option>No</option>
+  </select>
+
+  <label>If yes, approximately how many hours per week do you train or practice during semester?</label>
+  <select name="Custom_Training_Hours">
+    <option value="">Select if applicable</option>
+    <option>1–3 hours</option>
+    <option>4–6 hours</option>
+    <option>7–10 hours</option>
+    <option>More than 10 hours</option>
+  </select>
+
+  <label>Have you experienced any injury, pain, or physical limitation in the past 3 months that affects your movement?</label>
+  <select name="Custom_Injury_Pain" required>
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+
+  <label>If yes, does this condition currently affect your ability to perform daily activities or exercise?</label>
+  <select name="Custom_Injury_Impact">
+    <option value="">Select if applicable</option>
+    <option>Not at all</option>
+    <option>Slightly</option>
+    <option>Moderately</option>
+    <option>Significantly</option>
+  </select>
+
+  <h3>Additional Academic Context</h3>
+
+  <label>How financially stressed do you generally feel during semester?</label>
+  <select name="Financial_Stress">
+    <option value="">Select</option>
+    <option>Not at all</option>
+    <option>Slightly</option>
+    <option>Moderately</option>
+    <option>Quite a bit</option>
+    <option>Extremely</option>
+  </select>
+
+  <label>During semester, how often do you feel academically burned out?</label>
+  <select name="Academic_Burnout">
+    <option value="">Select</option>
+    <option>Never</option>
+    <option>Rarely</option>
+    <option>Sometimes</option>
+    <option>Often</option>
+    <option>Very often</option>
+  </select>
+
+  <label>Have you used any campus support resources during the current or most recent semester? (Select all that apply)</label>
+  <div class="options">
+    <label><input type="checkbox" name="Campus_Support[]" value="Academic support/tutoring"> Academic support/tutoring</label>
+    <label><input type="checkbox" name="Campus_Support[]" value="Counseling or mental health support"> Counseling or mental health support</label>
+    <label><input type="checkbox" name="Campus_Support[]" value="Health services"> Health services</label>
+    <label><input type="checkbox" name="Campus_Support[]" value="Financial support resources"> Financial support resources</label>
+    <label><input type="checkbox" name="Campus_Support[]" value="Accessibility/disability accommodations"> Accessibility/disability accommodations</label>
+    <label><input type="checkbox" name="Campus_Support[]" value="None of the above"> None of the above</label>
+  </div>
+
+  
+  <label>Have you had any of the following during the current or most recent term? Select all that apply.</label>
+  <div class="options">
+    <label><input type="checkbox" name="Custom_Academic_Issues" value="Withdrew from a course" /> Withdrew from a course</label>
+    <label><input type="checkbox" name="Custom_Academic_Issues" value="Received an incomplete" /> Received an incomplete</label>
+    <label><input type="checkbox" name="Custom_Academic_Issues" value="Reduced course load during the term" /> Reduced course load during the term</label>
+    <label><input type="checkbox" name="Custom_Academic_Issues" value="None of the above" /> None of the above</label>
+  </div>
+
+  <label>Is there anything important about your current situation that these questions did not capture? (Optional)</label>
+  <textarea
+    name="Additional_Context"
+    rows="5"
+    placeholder="Examples: unusual workload, illness, injury, family responsibilities, transportation challenges, temporary stressors, etc."
+  ></textarea>
+</div>
           <button type="submit">Submit Completed Survey</button>
         </form>
       </section>
