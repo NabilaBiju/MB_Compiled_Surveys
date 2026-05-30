@@ -1093,9 +1093,14 @@ document
       event.preventDefault();
 
       const submitTime = new Date();
-      const durationSeconds = Math.round((submitTime - startTime) / 1000);
-      const durationMinutes = (durationSeconds / 60).toFixed(2);
 
+if (!startTime) {
+  startTime = submitTime;
+  document.getElementById("start_time").value = startTime.toISOString();
+}
+
+const durationSeconds = Math.round((submitTime - startTime) / 1000);
+const durationMinutes = (durationSeconds / 60).toFixed(2);
       document.getElementById("submit_time").value = submitTime.toISOString();
       document.getElementById("duration_seconds").value = durationSeconds;
       document.getElementById("duration_minutes").value = durationMinutes;
